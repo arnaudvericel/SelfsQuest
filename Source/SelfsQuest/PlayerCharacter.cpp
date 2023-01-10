@@ -70,11 +70,13 @@ void APlayerCharacter::Tick(float DeltaTime)
 
 		if (collided)
         {
+			// fixme
             //RotateTowards(HitResult.ImpactPoint); // fixme : rotate the guns only?
         }
 	}
 }
 
+// Currently unused, fixme
 void APlayerCharacter::RotateTowards(FVector TargetLocation)
 {
 	FVector ToTarget = TargetLocation - GetActorLocation();
@@ -89,6 +91,7 @@ void APlayerCharacter::RotateTowards(FVector TargetLocation)
 													 YawInterpSpeed));
 }
 
+// Currently unused, fixme
 float APlayerCharacter::GetCorrectYawAngle(float InYawAngle)
 {
 	float YawValue = InYawAngle;

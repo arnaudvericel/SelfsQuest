@@ -38,8 +38,6 @@ void ULaserComponent::FireLaser()
 
     if (LaserBeam)
     {
-        LaserBeam->SetOwner(GetOwner());
-
         float DamageToApply = BaseDamage;
         if (ShooterGameMode) DamageToApply *= ShooterGameMode->GetDamageMultiplier();
         LaserBeam->SetDamage(DamageToApply);

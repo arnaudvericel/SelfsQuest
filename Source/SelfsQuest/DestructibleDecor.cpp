@@ -19,6 +19,7 @@ void ADestructibleDecor::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	// todo
 }
 
 // Called every frame
