@@ -14,5 +14,6 @@ Content/StarterContent
 *.xcodeproj
 *.xcworkspace
 SelfsQuest.code-workspace
+SelfsQuest.uproject
 .ignore
 Platforms/HoloLens/Config/HoloLensEngine.ini
