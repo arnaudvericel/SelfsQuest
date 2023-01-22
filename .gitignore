@@ -17,3 +17,6 @@ SelfsQuest.code-workspace
 SelfsQuest.uproject
 .ignore
 Platforms/HoloLens/Config/HoloLensEngine.ini
+*.uasset
+*.umap
+Content
