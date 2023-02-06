@@ -7,6 +7,9 @@
 #include "HealthComponent.generated.h"
 
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FHealthChangedDelegate)
+
+
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class SELFSQUEST_API UHealthComponent : public UActorComponent
 {
@@ -20,6 +23,8 @@ public:
 	float GetHealthPercent() const;
 	bool IsAlive() const;
 
+	UPROPERTY(BlueprintAssignable)
+	FHealthChangedDelegate HealthChanged;
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
@@ -43,8 +48,4 @@ private:
 	float RegenTickDuration;
 	FTimerHandle RegenTimerHandle;
 	void HealTick();
-
-	// Health Bar
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Health", meta = (AllowPrivateAccess = "true"))
-	class UHealthBar* HealthBar;
 };

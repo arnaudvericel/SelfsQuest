@@ -27,7 +27,9 @@ void UHealthComponent::BeginPlay()
 	Super::BeginPlay();
 
 	Health = MaxHealth;
+	
 	GetOwner()->OnTakeAnyDamage.AddDynamic(this, &UHealthComponent::DamageTaken);
+
 	ShooterGameMode = Cast<AShooterGameMode>(UGameplayStatics::GetGameMode(this));
 
 	if (RegenHealth) GetWorld()->GetTimerManager().SetTimer(RegenTimerHandle, this, &UHealthComponent::HealTick, RegenTickDuration, true);
@@ -40,7 +42,7 @@ void UHealthComponent::HealTick()
 		if (RegenPerTick >= 0)
 		{
 			Health += RegenPerTick;
-			if (HealthBar) HealthBar->Update(GetHealthPercent());
+			HealthChanged.Broadcast();
 		}
 	}
 }
@@ -50,7 +52,7 @@ void UHealthComponent::DamageTaken(AActor* DamagedActor, float Damage, const UDa
 	if (Damage <= 0.f) return;
 
 	Health -= Damage;
-	if (HealthBar) HealthBar->Update(GetHealthPercent());
+	HealthChanged.Broadcast();
 
 	if (Health <= 0)
 	{
