@@ -11,6 +11,7 @@ UGunsComponent::UGunsComponent()
 {
     IsFiringOnTheRight = true;
     FireRate = 1.f;
+    SetActive(true);
 }
 
 void UGunsComponent::BeginPlay()
@@ -18,6 +19,13 @@ void UGunsComponent::BeginPlay()
     Super::BeginPlay();
 
     ShooterGameMode = Cast<AShooterGameMode>(UGameplayStatics::GetGameMode(GetWorld()));
+}
+
+void UGunsComponent::Setup(FGunsSettings& GunsSettings)
+{
+    this->SetActive(GunsSettings.CanShoot);
+    if (GunsSettings.BaseDamage >= 0) this->BaseDamage = GunsSettings.BaseDamage;
+    if (GunsSettings.FireRate > 0) this->FireRate = GunsSettings.FireRate;
 }
 
 void UGunsComponent::DoAction()

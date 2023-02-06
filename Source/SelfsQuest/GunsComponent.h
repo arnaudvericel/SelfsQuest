@@ -6,6 +6,29 @@
 #include "DamageDealerComponent.h"
 #include "GunsComponent.generated.h"
 
+/* Structure that defines the guns settings -- can be passed on to the component for quick and easy configuration, e.g. when the gamemode spawns enemies */
+USTRUCT(BlueprintType)
+struct FGunsSettings
+{
+    GENERATED_BODY()
+
+public:
+	/* Default constructor */
+	FGunsSettings() : CanShoot(false), FireRate(1.0f), BaseDamage(30.0f) {}
+
+    /** Should the component be activated */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    bool CanShoot;
+
+    /** Fire rate value */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    float FireRate;
+
+	/** Base damage value */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    float BaseDamage;
+};
+
 /**
  * 
  */
@@ -16,6 +39,9 @@ class SELFSQUEST_API UGunsComponent : public UDamageDealerComponent
 
 public:
 	UGunsComponent();
+
+	UFUNCTION(BlueprintCallable)
+	void Setup(FGunsSettings& GunsSettings);
 
 	virtual void DoAction() override;
 	virtual void StopAction() override;
