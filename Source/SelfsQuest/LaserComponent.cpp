@@ -12,6 +12,15 @@ ULaserComponent::ULaserComponent()
     LaserTimer = 2.f;
     OverheatTimer = 3.f;
     HasOverheat = false;
+    SetActive(true);
+}
+
+void ULaserComponent::Setup(FLaserSettings& LaserSettings)
+{
+    this->SetActive(LaserSettings.CanShoot);
+    if (LaserSettings.BaseDamage >= 0.) this->BaseDamage = LaserSettings.BaseDamage;
+    if (LaserSettings.LaserTimer > 0) this->LaserTimer = LaserSettings.LaserTimer;
+    if (LaserSettings.OverheatTimer > 0) this->OverheatTimer = LaserSettings.OverheatTimer;
 }
 
 void ULaserComponent::DoAction()

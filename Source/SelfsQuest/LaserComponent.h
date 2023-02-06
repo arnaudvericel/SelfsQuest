@@ -8,6 +8,34 @@
 
 class USoundBase;
 class UParticleSystem;
+
+/* Structure that defines the laser settings -- can be passed on to the component for quick and easy configuration, e.g. when the gamemode spawns enemies */
+USTRUCT(BlueprintType)
+struct FLaserSettings
+{
+    GENERATED_BODY()
+
+public:
+	/* Default constructor */
+	FLaserSettings() : CanShoot(false), BaseDamage(30.0f), LaserTimer(2.0f), OverheatTimer(3.0f) {}
+
+    /** Should the component be activated */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    bool CanShoot;
+
+	/** Base damage value */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    float BaseDamage;
+
+	/** How long the laser can be shot before overheating */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    float LaserTimer;
+
+	/** How long the laser overheats for */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    float OverheatTimer;
+};
+
 /**
  * 
  */
@@ -19,6 +47,8 @@ class SELFSQUEST_API ULaserComponent : public UDamageDealerComponent
 public:
 	ULaserComponent();
 
+	UFUNCTION(BlueprintCallable)
+	void Setup(FLaserSettings& LaserSettings);
 	virtual void DoAction() override;
 	virtual void StopAction() override;
 
